@@ -1,0 +1,24 @@
+﻿@model ProjectLeader.Models.BaseViewModel
+@using ProjectLeader.Helpers
+@{
+    string addButton = "<button type='button' onClick='onAddNewClick()' class='btn btn-success btn-nav'><span class='glyphicon glyphicon-plus'></span>&nbsp;Přidat projekt</button>";
+}
+<br/>
+<script type="text/javascript">
+    function onAddNewClick() {
+            window.location = "/Home/CreateProject";
+            return true;
+    }
+
+        function onChange(arg) {
+                var grid = $("#ProjectGrid").data("kendoGrid");
+								var selectedItem = grid.dataItem(grid.select());
+            window.location = "/Home/ProjectIndex?uid=" + selectedItem.Id;
+        }
+
+</script>
+
+@(Html.GetStandartGrid<ProjectLeader.Models.ProjectViewModel>("ProjectGrid", null, null, "GetProjects", "Home", null, null, addButton).Events(eve =>
+  {
+      eve.Change("onChange");
+  }))
