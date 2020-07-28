@@ -340,6 +340,7 @@ c:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\System.Web.Razor.xml
 c:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\System.Web.WebPages.xml
 c:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\System.Web.WebPages.Deployment.xml
 c:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\System.Web.WebPages.Razor.xml
-c:\GitHub\Gothmog\ProjectLeader\ProjectLeader\obj\Debug\ProjectLeader.csprojResolveAssemblyReference.cache
 c:\GitHub\Gothmog\ProjectLeader\ProjectLeader\obj\Debug\ProjectLeader.dll
 c:\GitHub\Gothmog\ProjectLeader\ProjectLeader\obj\Debug\ProjectLeader.pdb
+c:\GitHub\Gothmog\ProjectLeader\ProjectLeader\obj\Debug\ProjectLeader.csproj.CoreCompileInputs.cache
+c:\GitHub\Gothmog\ProjectLeader\ProjectLeader\obj\Debug\ProjectLeader.csproj.CopyComplete
