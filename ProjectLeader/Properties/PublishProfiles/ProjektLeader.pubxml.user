@@ -46,10 +46,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/28/2016 22:24:36</publishTime>
     </File>
     <File Include="bin/ProjectLeader.dll">
-      <publishTime>07/28/2020 15:43:49</publishTime>
+      <publishTime>07/28/2020 15:59:19</publishTime>
     </File>
     <File Include="bin/ProjectLeader.pdb">
-      <publishTime>07/28/2020 15:43:49</publishTime>
+      <publishTime>07/28/2020 15:59:19</publishTime>
     </File>
     <File Include="bin/StructureMap.dll">
       <publishTime>05/03/2016 06:41:46</publishTime>

@@ -56,8 +56,8 @@ namespace ProjectLeader.Controllers
 					Start = task.StartInsert,
 					End = task.EndInsert
           }, AuthUserId);
-          Project project = db.GetItem<Project>(x => x._id == ObjectId.Parse(task.ProjectIdIns));
-          return RedirectToAction("ProjectIndex", "Home", new { @uid = project.Name });
+          //Project project = db.GetItem<Project>(x => x._id == ObjectId.Parse(task.ProjectIdIns));
+          return RedirectToAction("ProjectIndex", "Home", new { @uid = task.ProjectIdIns });
         }
         else
         {
