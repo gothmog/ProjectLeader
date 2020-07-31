@@ -109,9 +109,9 @@ namespace ProjectLeader.Service
       return member;
     }
 
-    public DataSourceResult GetProjects([DataSourceRequest]DataSourceRequest request)
+    public DataSourceResult GetProjects([DataSourceRequest]DataSourceRequest request, string uid)
     {
-        IQueryable<Project> query = db.GetCollection<Project>(x=> true).AsQueryable();
+        IQueryable<Project> query = db.GetCollection<Project>(x=> x.CreatorId == ObjectId.Parse(uid)).AsQueryable();
         return query.ToDataSourceResult(request, project => new ProjectViewModel(project));
     }
 

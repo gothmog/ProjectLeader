@@ -17,7 +17,7 @@ namespace ProjectLeader.Service.Iface
     Task GetRootTaskForId(ObjectId id);
     Project GetProjectIdForTask(Task t);
     Task GetConcreteTaskFromRoot(Task task, ObjectId id);
-    DataSourceResult GetProjects([DataSourceRequest] DataSourceRequest request);
+    DataSourceResult GetProjects([DataSourceRequest] DataSourceRequest request, string uid);
     IList<Task> SelectTasksForProject(string projectId);
   }
 }

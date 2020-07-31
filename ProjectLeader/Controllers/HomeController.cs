@@ -38,7 +38,7 @@ namespace ProjectLeader.Controllers
       [HttpPost]
       public ActionResult GetProjects([DataSourceRequest]DataSourceRequest request)
       {
-        DataSourceResult result = taskService.GetProjects(request);
+        DataSourceResult result = taskService.GetProjects(request, AuthUserId.ToString());
         return this.Json(result, JsonRequestBehavior.AllowGet);
       }
 

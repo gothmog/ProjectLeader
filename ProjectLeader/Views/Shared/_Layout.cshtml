@@ -24,7 +24,7 @@
         <header>
             <div class="content-wrapper">
                 <div class="float-left">
-                    @if (!String.IsNullOrEmpty(Model.ProjectName))
+                    @if (Model != null && !String.IsNullOrEmpty(Model.ProjectName))
                     {
                         if (MongoDB.Bson.ObjectId.Empty == Model.ProjectId)
                         { 
