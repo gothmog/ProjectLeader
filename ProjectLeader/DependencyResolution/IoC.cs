@@ -31,7 +31,8 @@ namespace ProjectLeader.DependencyResolution {
                                         scan.AssemblyContainingType(typeof(MongoBaseRepository.IMongoRepository));
                                         scan.WithDefaultConventions();
                                     });
-                            x.For<MongoBaseRepository.IMongoRepository>().Use<MongoBaseRepository.MongoRepository>().Ctor<string>("db").Is("Projekty"); ;
+                            x.For<MongoBaseRepository.IMongoRepository>().Use<MongoBaseRepository.MongoRepository>().Ctor<string>("db").Is("Projekty");
+                            x.For<IHornbachParser>().Use<HornbachParser>();
                             x.For<ITaskService>().Use<TaskService>();
                         });
             return ObjectFactory.Container;

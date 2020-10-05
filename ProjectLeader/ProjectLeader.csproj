@@ -44,6 +44,9 @@
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.11.24.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.24\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="Kendo.Mvc">
       <HintPath>..\packages\Kendo\Kendo.Mvc.dll</HintPath>
     </Reference>
@@ -194,6 +197,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Service\HornbachParser.cs" />
+    <Compile Include="Service\Iface\IHornbachParser.cs" />
     <Compile Include="Service\Iface\ITaskService.cs" />
     <Compile Include="Service\TaskService.cs" />
     <Compile Include="Models\BaseViewModel.cs" />
