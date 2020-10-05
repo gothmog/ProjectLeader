@@ -32,9 +32,11 @@ namespace ProjectLeader.Controllers
 
         public AccountController(IMongoRepository db = null, IMongoMembershipService _memb = null)
         {
-          Db = db ?? DependencyResolver.Current.GetService<IMongoRepository>();
-          MemberShip = _memb ?? DependencyResolver.Current.GetService<IMongoMembershipService>();
-		}
+            Db = db ?? DependencyResolver.Current.GetService<IMongoRepository>();
+            MemberShip = _memb ?? DependencyResolver.Current.GetService<IMongoMembershipService>();
+            if (Db.GetItem<MongoUser>(x => x.Email == "husak.ondra@gmail.com") == null) Db.AddItem<MongoUser>(new MongoUser() { Email = "husak.ondra@gmail.com", FirstName = "Ondra", SecondName = "Husák", IsApproved = true, Password = "immortal", UserName = "Gothmog" }, ObjectId.Empty);
+            if (Db.GetItem<MongoUser>(x => x.Email == "husakovaradka@gmail.com") == null) Db.AddItem<MongoUser>(new MongoUser() { Email = "husakovaradka@gmail.com", FirstName = "Radka", SecondName = "Husáková", IsApproved = true, Password = "sodom", UserName = "Jupík" }, ObjectId.Empty);
+        }
 
 		[HttpGet]
         public virtual ActionResult LogOn()

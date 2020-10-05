@@ -2,6 +2,7 @@
 using MongoDB.Bson;
 using ProjectLeader.Classes;
 using ProjectLeader.Models;
+using ProjectLeader.Service;
 using ProjectLeader.Service.Iface;
 using System;
 using System.Collections.Generic;
@@ -188,7 +189,7 @@ namespace ProjectLeader.Controllers
             return RedirectToAction("UpsertTask", "Task", new { taskId = model.ParentTaskIdString });
         }
 
-        [HttpPost]
+        [HttpGet]
         public Resource FindResource(string url)
         {
             return _hornbachParser.GetResource(url);

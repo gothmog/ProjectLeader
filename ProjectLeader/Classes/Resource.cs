@@ -4,34 +4,35 @@ using System.ComponentModel;
 
 namespace ProjectLeader.Classes
 {
-  public class Resource: BaseNamedEntity
-  {
-    [DisplayName("Popis")]
-    public string Description { get; set; }
-    [DisplayName("Cena")]
-    public decimal Price { get; set; }
-    [DisplayName("Počet")]
-    public decimal Count { get; set; }
-
-    [BsonIgnore]
-    public string ParentTaskIdString { get; set; }
-
-    [BsonIgnore]
-    public decimal Sum
+    public class Resource : BaseNamedEntity
     {
-      get
-      {
-        return Price * Count;
-      }
-    }
+        [DisplayName("Popis")]
+        public string Description { get; set; }
+        public string ImageUrl { get; set; }
+        [DisplayName("Cena")]
+        public decimal Price { get; set; }
+        [DisplayName("Počet")]
+        public decimal Count { get; set; }
 
-    [BsonIgnore]
-    public string IdString
-    {
-      get
-      {
-        return _id.ToString();
-      }
+        [BsonIgnore]
+        public string ParentTaskIdString { get; set; }
+
+        [BsonIgnore]
+        public decimal Sum
+        {
+            get
+            {
+                return Price * Count;
+            }
+        }
+
+        [BsonIgnore]
+        public string IdString
+        {
+            get
+            {
+                return _id.ToString();
+            }
+        }
     }
-  }
 }

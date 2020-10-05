@@ -14,27 +14,51 @@ namespace ProjectLeader.Service
 	{
 		public Resource GetResource(string url)
 		{
+			Resource resource = new Resource();
 			WebRequest objRequest = HttpWebRequest.Create(url);
 			WebResponse objResponse = objRequest.GetResponse();
 			using (StreamReader sr = new StreamReader(objResponse.GetResponseStream()))
 			{
-				strResult = sr.ReadToEnd();
-				sr.Close();
-			}
-			HtmlDocument doc = new HtmlDocument();
-			doc.LoadHtml(strResult);
-			IList<HtmlNode> nodes = new List<HtmlNode>();
-			GetBodyNodeByTag(doc.DocumentNode, nodes, "table");
-			if (nodes.Count > 0)
-			{
-				IList<HtmlNode> trNodes = new List<HtmlNode>();
-				GetBodyNodeByTag(nodes[0], trNodes, "tr");
-				foreach (HtmlNode node in trNodes)
+				HtmlDocument doc = new HtmlDocument();
+				doc.LoadHtml(sr.ReadToEnd());
+				IList<HtmlNode> nodes = new List<HtmlNode>();
+				GetBodyNodeById(doc.DocumentNode, nodes, "product-information");
+				if (nodes.Count > 0)
 				{
-					list.Add(node.ChildNodes[1].InnerHtml.Replace("<em>", "").Replace("</em>", ""), node.ChildNodes[0].InnerHtml);
+					IList<HtmlNode> nameNodes = new List<HtmlNode>();
+					GetBodyNodeByTag(nodes[0], nameNodes, "h1");
+					if (nameNodes.Count > 0)
+					{
+						resource.Name = nameNodes[0].InnerText;
+					}
+					IList<HtmlNode> priceNodes = new List<HtmlNode>();
+					GetBodyNodeByTag(nodes[0], priceNodes, "span");
+					if (priceNodes.Count > 0)
+					{
+						string price = priceNodes[0].InnerText.Split(new string[] { "CZK" }, StringSplitOptions.RemoveEmptyEntries)[0];
+						decimal priceDec = 0;
+						if (Decimal.TryParse(price, out priceDec))
+						{
+							resource.Price = priceDec;
+						}
+					}
+
 				}
+				nodes = new List<HtmlNode>();
+				GetBodyNodeById(doc.DocumentNode, nodes, "awssld__container");
+				if (nodes.Count > 0)
+				{
+					IList<HtmlNode> picNodes = new List<HtmlNode>();
+					GetBodyNodeByTag(nodes[0], picNodes, "img");
+					if(picNodes.Count > 0)
+					{
+						resource.ImageUrl = picNodes[0].Attributes.FirstOrDefault(x => x.Name == "src").Value;
+					}
+				}
+				sr.Close();
+				return resource;
+
 			}
-			return new Resource();
 		}
 
 		private void GetBodyNodeById(HtmlNode html, IList<HtmlNode> nodes, string nameNode)
