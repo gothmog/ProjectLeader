@@ -938,6 +938,7 @@
     <Content Include="Views\Home\ProjectIndexByUser.cshtml" />
     <Content Include="Views\Shared\CommentsPartial.cshtml" />
     <Content Include="Views\Shared\AttachmentsPartial.cshtml" />
+    <Content Include="Views\Task\EditResource.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />

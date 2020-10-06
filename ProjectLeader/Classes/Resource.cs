@@ -4,15 +4,15 @@ using System.ComponentModel;
 
 namespace ProjectLeader.Classes
 {
-    public class Resource : BaseNamedEntity
+    public class Resource : BaseEntity
     {
-        [DisplayName("Popis")]
-        public string Description { get; set; }
-        public string ImageUrl { get; set; }
+        [DisplayName("Název")]
+        public string ResourceName { get; set; }
+        public string ResourceImageUrl { get; set; }
         [DisplayName("Cena")]
-        public decimal Price { get; set; }
+        public decimal ResourcePrice { get; set; }
         [DisplayName("Počet")]
-        public decimal Count { get; set; }
+        public decimal ResourceCount { get; set; }
 
         [BsonIgnore]
         public string ParentTaskIdString { get; set; }
@@ -22,7 +22,7 @@ namespace ProjectLeader.Classes
         {
             get
             {
-                return Price * Count;
+                return ResourcePrice * ResourceCount;
             }
         }
 

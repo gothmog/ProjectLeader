@@ -105,12 +105,11 @@
 
 .Columns(columns =>
 {
-    columns.Bound(o => o.Name).Title("Název");
-    columns.Bound(o => o.Description).Title("Popis");
-    columns.Bound(o => o.Count).Title("Počet");
-    columns.Bound(o => o.Price).Title("Cena");
+    columns.Bound(o => o.ResourceName).Title("Název");
+    columns.Bound(o => o.ResourceCount).Title("Počet");
+    columns.Bound(o => o.ResourcePrice).Title("Cena");
     columns.Bound(o => o.Sum).Title("Suma");
-    columns.Bound(o => o.IdString).ClientTemplate("<a class='t-button' href='/Task/DeleteResource?taskId=#= ParentTaskIdString #&resId=#= IdString #'>Smazat zdroj</a>").Title("Akce").Width(150);
+    columns.Bound(o => o.IdString).ClientTemplate("<a class='t-button' href='/Task/DeleteResource?taskId=#= ParentTaskIdString #&resId=#= IdString #'>Smazat zdroj</a><a class='t-button' href='/Task/EditResource?taskId=#= ParentTaskIdString #&resId=#= IdString #'>Editovat zdroj</a>").Title("Akce").Width(150);
 }))
                 </div>
 

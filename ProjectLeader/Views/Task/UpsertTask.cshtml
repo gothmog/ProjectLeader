@@ -26,16 +26,24 @@
     }
 
     function GetResource() {
-        alert("TEST");
-        debugger;
+        var link = $("#hornbachUrl").val();
         $.ajax({
             type: "GET",
-            url: '/Task/FindResource/?url=https://www.hornbach.cz/shop/BALAKRYL-Uni-mat-0100-bily-0-7kg/4289272/artikl.html',
-           // data: { url: "https://www.hornbach.cz/shop/BALAKRYL-Uni-mat-0100-bily-0-7kg/4289272/artikl.html" },
+            url: '/Task/FindResource/?url=' + link,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
-                alert(response);
+                debugger;
+                alert('Test');
+                $("#ResourceName").val(response.ResourceName);
+                $("#ResourcePrice").val(response.ResourcePrice);
+                $('.image_class_hornbach').show();
+                $("#image_hornbach").attr("src", response.ResourceImageUrl);
+                $("#ResourceImageUrl").val(response.ResourceImageUrl);
+            },
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                alert(err.Message);
             }
         });
     }
@@ -121,9 +129,9 @@
                 {
                     @Html.AntiForgeryToken()
                     @Html.Partial("ResourcePartial", new ProjectLeader.Classes.Resource()
-           {
-               Count = 1
-           })
+               {
+                   ResourceCount = 1
+               })
                 }
             </div>
             <div class="modal-footer">

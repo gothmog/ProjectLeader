@@ -15,6 +15,10 @@ namespace ProjectLeader.Service
 		public Resource GetResource(string url)
 		{
 			Resource resource = new Resource();
+			ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls
+		| SecurityProtocolType.Tls11
+		| SecurityProtocolType.Tls12
+		| SecurityProtocolType.Ssl3;
 			WebRequest objRequest = HttpWebRequest.Create(url);
 			WebResponse objResponse = objRequest.GetResponse();
 			using (StreamReader sr = new StreamReader(objResponse.GetResponseStream()))
@@ -29,30 +33,31 @@ namespace ProjectLeader.Service
 					GetBodyNodeByTag(nodes[0], nameNodes, "h1");
 					if (nameNodes.Count > 0)
 					{
-						resource.Name = nameNodes[0].InnerText;
+						resource.ResourceName = nameNodes[0].InnerText;
 					}
 					IList<HtmlNode> priceNodes = new List<HtmlNode>();
 					GetBodyNodeByTag(nodes[0], priceNodes, "span");
 					if (priceNodes.Count > 0)
 					{
-						string price = priceNodes[0].InnerText.Split(new string[] { "CZK" }, StringSplitOptions.RemoveEmptyEntries)[0];
+						HtmlNode priceNode = priceNodes.FirstOrDefault(x => x.InnerText.Contains("CZK"));
+						string price = priceNode.InnerText.Split(new string[] { "CZK" }, StringSplitOptions.RemoveEmptyEntries)[0];
 						decimal priceDec = 0;
 						if (Decimal.TryParse(price, out priceDec))
 						{
-							resource.Price = priceDec;
+							resource.ResourcePrice = priceDec;
 						}
 					}
 
 				}
 				nodes = new List<HtmlNode>();
-				GetBodyNodeById(doc.DocumentNode, nodes, "awssld__container");
+				GetBodyNodeByClass(doc.DocumentNode, nodes, "awssld__container");
 				if (nodes.Count > 0)
 				{
 					IList<HtmlNode> picNodes = new List<HtmlNode>();
 					GetBodyNodeByTag(nodes[0], picNodes, "img");
 					if(picNodes.Count > 0)
 					{
-						resource.ImageUrl = picNodes[0].Attributes.FirstOrDefault(x => x.Name == "src").Value;
+						resource.ResourceImageUrl = picNodes[0].Attributes.FirstOrDefault(x => x.Name == "src").Value;
 					}
 				}
 				sr.Close();

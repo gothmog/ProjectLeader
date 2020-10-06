@@ -397,3 +397,4 @@ c:\Users\Gothmog\Documents\GitHub\ProjectLeader\ProjectLeader\obj\Debug\ProjectL
 c:\Users\Gothmog\Documents\GitHub\ProjectLeader\ProjectLeader\obj\Debug\ProjectLeader.csproj.CopyComplete
 c:\Users\Gothmog\Documents\GitHub\ProjectLeader\ProjectLeader\obj\Debug\ProjectLeader.dll
 c:\Users\Gothmog\Documents\GitHub\ProjectLeader\ProjectLeader\obj\Debug\ProjectLeader.pdb
+C:\Users\Gothmog\Documents\GitHub\ProjectLeader\ProjectLeader\obj\Debug\ProjectLeader.csprojAssemblyReference.cache

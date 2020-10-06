@@ -190,9 +190,22 @@ namespace ProjectLeader.Controllers
         }
 
         [HttpGet]
-        public Resource FindResource(string url)
+        public JsonResult FindResource(string url)
         {
-            return _hornbachParser.GetResource(url);
+            return Json(_hornbachParser.GetResource(url), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult EditResource(string taskId, string resId)
+        {
+            ObjectId parentId = ObjectId.Empty;
+            if (ObjectId.TryParse(taskId, out parentId))
+            {
+                Task rootTask = taskService.GetRootTaskForId(parentId);
+                Task concreteTask = taskService.GetConcreteTaskFromRoot(rootTask, parentId);
+                Resource res = concreteTask.Resources.First(x => x.IdString == resId);
+                return View(res);
+            }
+            return null;
         }
 
         public ActionResult DeleteResource(string taskId, string resId)
