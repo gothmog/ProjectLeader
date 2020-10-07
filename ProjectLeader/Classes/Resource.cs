@@ -27,7 +27,7 @@ namespace ProjectLeader.Classes
         }
 
         [BsonIgnore]
-        public string IdString
+        public string ResourceIdString
         {
             get
             {

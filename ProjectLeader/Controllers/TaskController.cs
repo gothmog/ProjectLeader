@@ -172,7 +172,7 @@ namespace ProjectLeader.Controllers
         #region Resources
 
         [HttpPost]
-        public ActionResult AddResourceToTask(Resource model)
+        public ActionResult UpsertResourceToTask(Resource model)
         {
             ObjectId parentId = ObjectId.Empty;
             if (ObjectId.TryParse(model.ParentTaskIdString, out parentId))
@@ -182,8 +182,22 @@ namespace ProjectLeader.Controllers
                 model._id = ObjectId.GenerateNewId();
                 model.Created = DateTime.Now;
                 model.CreatorId = AuthUserId;
-                if (concreteTask.Resources == null) concreteTask.Resources = new List<Resource>();
-                concreteTask.Resources.Add(model);
+                if (concreteTask.Resources == null)
+                {
+                    concreteTask.Resources = new List<Resource>();
+                    concreteTask.Resources.Add(model);
+                }
+                else
+                {
+                    Resource oldRes = concreteTask.Resources.FirstOrDefault(x => x.ResourceName == model.ResourceName);
+                    if(oldRes != null)
+                    {
+                        model.CreatorId = oldRes.CreatorId;
+                        model.Created = oldRes.Created;
+                        concreteTask.Resources.Remove(oldRes);
+                    }
+                    concreteTask.Resources.Add(model);
+                }
                 db.UpdateItem(rootTask);
             }
             return RedirectToAction("UpsertTask", "Task", new { taskId = model.ParentTaskIdString });
@@ -195,19 +209,6 @@ namespace ProjectLeader.Controllers
             return Json(_hornbachParser.GetResource(url), JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult EditResource(string taskId, string resId)
-        {
-            ObjectId parentId = ObjectId.Empty;
-            if (ObjectId.TryParse(taskId, out parentId))
-            {
-                Task rootTask = taskService.GetRootTaskForId(parentId);
-                Task concreteTask = taskService.GetConcreteTaskFromRoot(rootTask, parentId);
-                Resource res = concreteTask.Resources.First(x => x.IdString == resId);
-                return View(res);
-            }
-            return null;
-        }
-
         public ActionResult DeleteResource(string taskId, string resId)
         {
             ObjectId parentId = ObjectId.Empty;
@@ -215,7 +216,7 @@ namespace ProjectLeader.Controllers
             {
                 Task rootTask = taskService.GetRootTaskForId(parentId);
                 Task concreteTask = taskService.GetConcreteTaskFromRoot(rootTask, parentId);
-                Resource res = concreteTask.Resources.First(x => x.IdString == resId);
+                Resource res = concreteTask.Resources.First(x => x.ResourceIdString == resId);
                 if (res != null) concreteTask.Resources.Remove(res);
                 db.UpdateItem(rootTask);
             }

@@ -5,6 +5,7 @@
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model._id)
+        @Html.HiddenFor(model => model.ResourceIdString)
         @Html.HiddenFor(model => model.ParentTaskIdString)
 
         <div class="form-group">
@@ -14,10 +15,10 @@
                 @Html.ValidationMessageFor(model => model.ResourceName, "", new { @class = "text-danger" })
             </div>
         </div>
-            <div class="image_class_hornbach" style="display:none">
-                <img id="image_hornbach" alt="@Model.ResourceName" src="@Model.ResourceImageUrl" />
-                @Html.HiddenFor(model=> model.ResourceImageUrl)
-            </div>
+        <div class="image_class_hornbach" style="display:none">
+            <img id="image_hornbach" alt="@Model.ResourceName" src="@Model.ResourceImageUrl" />
+            @Html.HiddenFor(model => model.ResourceImageUrl)
+        </div>
 
 
 
@@ -43,7 +44,7 @@
                 @Html.Editor("hornbachUrl", new { @class = "control-label col-md-6" })
             </div>
             <div class="col-md-2">
-                <button type="button" class='btn btn-warning btn-nav' onclick="GetResource();"><span class='glyphicon glyphicon-question-sign'></span>&nbsp;Najít v Hornbachu</button>
+                <button id="findHornbach_button" type="button" class='btn btn-warning btn-nav' onclick="GetResource();"><span class='glyphicon glyphicon-question-sign'></span>&nbsp;Najít v Hornbachu</button>
             </div>
         </div>
 

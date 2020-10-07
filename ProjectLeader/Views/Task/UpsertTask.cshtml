@@ -27,25 +27,42 @@
 
     function GetResource() {
         var link = $("#hornbachUrl").val();
+        $("#findHornbach_button").prop("disabled", true);
+        $("#findHornbach_button").html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Loadingg...`);
         $.ajax({
             type: "GET",
             url: '/Task/FindResource/?url=' + link,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
-                debugger;
-                alert('Test');
                 $("#ResourceName").val(response.ResourceName);
                 $("#ResourcePrice").val(response.ResourcePrice);
                 $('.image_class_hornbach').show();
                 $("#image_hornbach").attr("src", response.ResourceImageUrl);
                 $("#ResourceImageUrl").val(response.ResourceImageUrl);
+                $("#findHornbach_button").prop("disabled", false);
+                $("#findHornbach_button").html(`<span class='glyphicon glyphicon-question-sign'></span>&nbsp;Najít v Hornbachu`);
             },
             error: function (xhr, status, error) {
                 var err = eval("(" + xhr.responseText + ")");
+                $("#findHornbach_button").prop("disabled", false);
+                $("#findHornbach_button").html(`<span class='glyphicon glyphicon-question-sign'></span>&nbsp;Najít v Hornbachu`);
                 alert(err.Message);
             }
         });
+    }
+
+    function editResource() {
+        $('#addResourcekModal').modal('show'); 
+        var grid = $("#GridResources").data("kendoGrid");
+        var model = grid.dataItem($(event.target).closest("tr"));
+        $("#ParentTaskIdString").val(model.ParentTaskIdString);
+        $("#ResourceName").val(model.ResourceName);
+        $("#ResourcePrice").val(model.ResourcePrice);
+        $("#ResourceCount").val(model.ResourceCount);
+        $('.image_class_hornbach').show();
+        $("#image_hornbach").attr("src", model.ResourceImageUrl);
+        $("#ResourceImageUrl").val(model.ResourceImageUrl);
     }
 </script>
 
@@ -125,7 +142,7 @@
                 <h4 class="modal-title">Přidání zdroje</h4>
             </div>
             <div class="modal-body">
-                @using (Html.BeginForm("AddResourceToTask", "Task"))
+                @using (Html.BeginForm("UpsertResourceToTask", "Task"))
                 {
                     @Html.AntiForgeryToken()
                     @Html.Partial("ResourcePartial", new ProjectLeader.Classes.Resource()
