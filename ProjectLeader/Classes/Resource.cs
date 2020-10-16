@@ -17,6 +17,7 @@ namespace ProjectLeader.Classes
         [BsonIgnore]
         public string ParentTaskIdString { get; set; }
 
+        [DisplayName("Souhrn")]
         [BsonIgnore]
         public decimal Sum
         {
