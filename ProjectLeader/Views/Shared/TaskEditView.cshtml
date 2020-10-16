@@ -116,14 +116,14 @@
 							<div class="form-group">
 								@Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-4">
-                                    @(Html.Kendo().DatePicker().Name("Start"))
+                                    @(Html.Kendo().DatePicker().Name("Start").Format("dd/MM/yyyy").Value(Model.Start))
                                 </div>
 							</div>
 
 							<div class="form-group">
 								@Html.LabelFor(model => model.End, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-4">
-                                    @(Html.Kendo().DatePicker().Name("End"))
+                                    @(Html.Kendo().DatePicker().Name("End").Format("dd/MM/yyyy").Value(Model.End))
                                 </div>
 							</div>
 
