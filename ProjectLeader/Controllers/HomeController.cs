@@ -59,7 +59,14 @@ namespace ProjectLeader.Controllers
         return View("Index", GenerateViewModel());
       }
 
-      private IList<TreeViewItemModel> GetTasksForProject(string id)
+        [HttpGet]
+        public ActionResult DeleteProject(string uid)
+        {
+            db.RemoveItem<Project>(x => x._id == ObjectId.Parse(uid));
+            return RedirectToAction("Index", GenerateViewModel());
+        }
+
+        private IList<TreeViewItemModel> GetTasksForProject(string id)
       {
 	      var tasks = taskService.SelectTasksForProject(id);
 		  IList<TreeViewItemModel> tasksview = new List<TreeViewItemModel>();
