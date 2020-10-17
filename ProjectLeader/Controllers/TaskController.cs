@@ -60,7 +60,6 @@ namespace ProjectLeader.Controllers
                     Start = task.StartInsert,
                     End = task.EndInsert
                 }, AuthUserId);
-                //Project project = db.GetItem<Project>(x => x._id == ObjectId.Parse(task.ProjectIdIns));
                 return RedirectToAction("ProjectIndex", "Home", new { @uid = task.ProjectIdIns });
             }
             else
@@ -150,6 +149,18 @@ namespace ProjectLeader.Controllers
             {
                 hist.UserIdPast = task.UserId.ToString();
                 task.UserId = ObjectId.Parse(model.UserId);
+                hist.IsChanged = true;
+            }
+            if(task.Start != model.Start)
+			{
+                task.Start = model.Start;
+                hist.StartPast = task.Start;
+                hist.IsChanged = true;
+			}
+            if (task.End != model.End)
+            {
+                task.End = model.End;
+                hist.EndPast = task.End;
                 hist.IsChanged = true;
             }
             if (hist.IsChanged)
