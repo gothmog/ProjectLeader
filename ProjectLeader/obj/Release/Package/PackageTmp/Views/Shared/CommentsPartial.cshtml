@@ -1,0 +1,20 @@
+﻿@model IList<ProjectLeader.Classes.Comment>
+
+<div>
+    <div>
+        @Html.TextArea("NewCommentText", String.Empty, new { style = "width: 565px; height:120px;" })
+    </div>
+    <div>
+        <button type='button' class='btn btn-success btn-nav' onclick="addCommentToTask()"><span class='glyphicon glyphicon-save'></span>&nbsp;Uložit komentář</button>
+    </div>
+    <table>
+        @if (Model != null)
+        {
+
+            foreach (ProjectLeader.Classes.Comment comment in Model)
+            {
+                <tr><td>@comment.Created.ToString()</td><td>@comment.Text</td><td>@comment.Author</td></tr>
+            }
+        }
+    </table>
+</div>

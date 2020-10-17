@@ -1,0 +1,85 @@
+﻿@model ProjectLeader.Models.TaskInsertViewModel
+@using ProjectLeader.Helpers;
+
+@{
+    var data = Html.GetUsersAsSelectListItems(Model.UserIdIns);
+}
+
+
+
+
+<div class="form-horizontal">
+    <h2>Úkol</h2>
+    <hr />
+    @Html.Hidden("ProjectIdIns")
+    @Html.Hidden("ParentTaskIdIns")
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.NameIns, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NameIns, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NameIns, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DescriptionIns, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-8">
+            @Html.TextAreaFor(model => model.DescriptionIns, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DescriptionIns, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.PriorityEnumIns, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-6">
+            @Html.Kendo().DropDownList().BindTo(Model.PriorityEnumIns.GetEnumSelectListItem()).Name("PriorityEnumIns").HtmlAttributes(new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.TypeEnumIns, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-6">
+            @Html.Kendo().DropDownList().BindTo(Model.TypeEnumIns.GetEnumSelectListItem()).Name("TypeEnumIns").HtmlAttributes(new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.StateEnumIns, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-6">
+            @Html.Kendo().DropDownList().BindTo(Model.StateEnumIns.GetEnumSelectListItem()).Name("StateEnumIns").HtmlAttributes(new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PercentIns, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.PercentIns, new { htmlAttributes = new { @class = "form-control", style = "width:170px !important" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.UserIdIns, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-6">
+            @Html.Kendo().DropDownList().Name("UserIdIns").BindTo(data).HtmlAttributes(new { @class = "form-control" })
+        </div>
+    </div>
+
+	<div class="form-group">
+		@Html.LabelFor(model => model.StartInsert, htmlAttributes: new { @class = "control-label col-md-2" })
+		<div class="col-md-4">
+			@(Html.Kendo().DatePicker().Name("StartInsert").HtmlAttributes(new { @class = "control-label col-md-2" }))
+		</div>
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(model => model.EndInsert, htmlAttributes: new { @class = "control-label col-md-2" })
+		<div class="col-md-4">
+			@(Html.Kendo().DatePicker().Name("EndInsert").HtmlAttributes(new { @class = "control-label col-md-2" }))
+		</div>
+	</div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type='submit' class='btn btn-success btn-nav'><span class='glyphicon glyphicon-save'></span>&nbsp;Uložit úkol</button>
+        </div>
+    </div>
+</div>

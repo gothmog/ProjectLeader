@@ -117,7 +117,7 @@
 							<div class="form-group">
 								@Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-4">
-                                    @(Html.Kendo().DatePicker().Name("Start"))
+                                    @(Html.Kendo().DatePicker().Name("Start").Format("yyyy/MM/dd"))
                                 </div>
 							</div>
 

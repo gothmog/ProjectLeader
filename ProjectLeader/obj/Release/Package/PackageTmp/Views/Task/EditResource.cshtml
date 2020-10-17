@@ -1,0 +1,25 @@
+﻿@model ProjectLeader.Classes.Resource
+    
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Editace zdroje</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("UpdateResourceToTask", "Task"))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Partial("ResourcePartial", new ProjectLeader.Classes.Resource()
+               {
+                   ResourceCount = 1
+               })
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
+            </div>
+        </div>
+    </div>

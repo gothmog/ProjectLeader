@@ -15,6 +15,21 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Antlr3.Runtime.pdb">
       <publishTime>04/28/2016 22:24:28</publishTime>
     </File>
+    <File Include="bin/BouncyCastle.Crypto.dll">
+      <publishTime>02/24/2020 15:29:24</publishTime>
+    </File>
+    <File Include="bin/HtmlAgilityPack.dll">
+      <publishTime>10/05/2020 18:32:48</publishTime>
+    </File>
+    <File Include="bin/HtmlAgilityPack.pdb">
+      <publishTime>10/05/2020 18:32:48</publishTime>
+    </File>
+    <File Include="bin/ICSharpCode.SharpZipLib.dll">
+      <publishTime>08/09/2019 08:40:22</publishTime>
+    </File>
+    <File Include="bin/ICSharpCode.SharpZipLib.pdb">
+      <publishTime>08/09/2019 08:40:22</publishTime>
+    </File>
     <File Include="bin/Kendo.Mvc.dll">
       <publishTime>04/16/2014 11:56:22</publishTime>
     </File>
@@ -45,11 +60,23 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>04/28/2016 22:24:36</publishTime>
     </File>
+    <File Include="bin/NPOI.dll">
+      <publishTime>04/04/2020 13:30:22</publishTime>
+    </File>
+    <File Include="bin/NPOI.OOXML.dll">
+      <publishTime>04/04/2020 13:30:06</publishTime>
+    </File>
+    <File Include="bin/NPOI.OpenXml4Net.dll">
+      <publishTime>04/04/2020 13:30:06</publishTime>
+    </File>
+    <File Include="bin/NPOI.OpenXmlFormats.dll">
+      <publishTime>04/04/2020 13:30:06</publishTime>
+    </File>
     <File Include="bin/ProjectLeader.dll">
-      <publishTime>07/28/2020 15:59:19</publishTime>
+      <publishTime>10/16/2020 15:33:54</publishTime>
     </File>
     <File Include="bin/ProjectLeader.pdb">
-      <publishTime>07/28/2020 15:59:19</publishTime>
+      <publishTime>10/16/2020 15:33:54</publishTime>
     </File>
     <File Include="bin/StructureMap.dll">
       <publishTime>05/03/2016 06:41:46</publishTime>
@@ -1429,7 +1456,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/28/2016 22:24:52</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>04/28/2016 22:41:40</publishTime>
+      <publishTime>10/16/2020 15:29:41</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>04/28/2016 22:24:52</publishTime>
@@ -2218,7 +2245,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/06/2019 18:41:20</publishTime>
     </File>
     <File Include="Views/Home/ProjectIndex.cshtml">
-      <publishTime>04/06/2019 19:20:34</publishTime>
+      <publishTime>10/16/2020 15:29:28</publishTime>
     </File>
     <File Include="Views/Home/ProjectIndexByUser.cshtml">
       <publishTime>07/01/2016 14:05:54</publishTime>
@@ -2233,10 +2260,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/10/2016 11:03:12</publishTime>
     </File>
     <File Include="Views/Shared/ResourcePartial.cshtml">
-      <publishTime>06/30/2016 14:15:48</publishTime>
+      <publishTime>10/07/2020 11:39:10</publishTime>
     </File>
     <File Include="Views/Shared/TaskEditView.cshtml">
-      <publishTime>10/10/2018 16:28:38</publishTime>
+      <publishTime>10/16/2020 15:29:41</publishTime>
     </File>
     <File Include="Views/Shared/TaskInsertView.cshtml">
       <publishTime>10/10/2018 16:20:22</publishTime>
@@ -2244,8 +2271,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Shared/_Layout.cshtml">
       <publishTime>07/28/2020 14:32:38</publishTime>
     </File>
+    <File Include="Views/Task/EditResource.cshtml">
+      <publishTime>10/07/2020 09:51:53</publishTime>
+    </File>
     <File Include="Views/Task/UpsertTask.cshtml">
-      <publishTime>07/10/2016 11:20:26</publishTime>
+      <publishTime>10/07/2020 11:38:20</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>05/08/2016 12:44:06</publishTime>
@@ -2254,7 +2284,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/28/2016 22:25:06</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/28/2020 15:43:50</publishTime>
+      <publishTime>10/16/2020 15:33:55</publishTime>
     </File>
   </ItemGroup>
 </Project>

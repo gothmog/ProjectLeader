@@ -245,7 +245,6 @@ c:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\System.Web.Razor.xml
 c:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\System.Web.WebPages.xml
 c:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\System.Web.WebPages.Deployment.xml
 c:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\System.Web.WebPages.Razor.xml
-c:\GitHub\Gothmog\ProjectLeader\ProjectLeader\obj\Release\ProjectLeader.csprojAssemblyReference.cache
 c:\GitHub\Gothmog\ProjectLeader\ProjectLeader\obj\Release\ProjectLeader.csproj.CoreCompileInputs.cache
 c:\GitHub\Gothmog\ProjectLeader\ProjectLeader\obj\Release\ProjectLeader.csproj.CopyComplete
 c:\GitHub\Gothmog\ProjectLeader\ProjectLeader\obj\Release\ProjectLeader.dll
@@ -303,3 +302,15 @@ c:\Users\Gothmog\Documents\GitHub\ProjectLeader\ProjectLeader\obj\Release\Projec
 c:\Users\Gothmog\Documents\GitHub\ProjectLeader\ProjectLeader\obj\Release\ProjectLeader.csproj.CopyComplete
 c:\Users\Gothmog\Documents\GitHub\ProjectLeader\ProjectLeader\obj\Release\ProjectLeader.dll
 c:\Users\Gothmog\Documents\GitHub\ProjectLeader\ProjectLeader\obj\Release\ProjectLeader.pdb
+C:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\BouncyCastle.Crypto.dll
+C:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\HtmlAgilityPack.dll
+C:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\ICSharpCode.SharpZipLib.dll
+C:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\NPOI.dll
+C:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\NPOI.OOXML.dll
+C:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\NPOI.OpenXml4Net.dll
+C:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\NPOI.OpenXmlFormats.dll
+C:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\BouncyCastle.Crypto.xml
+C:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\HtmlAgilityPack.pdb
+C:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\HtmlAgilityPack.xml
+C:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\ICSharpCode.SharpZipLib.pdb
+C:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\ICSharpCode.SharpZipLib.xml

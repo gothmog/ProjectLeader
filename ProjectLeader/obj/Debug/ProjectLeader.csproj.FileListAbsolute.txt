@@ -402,3 +402,12 @@ C:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\HtmlAgilityPack.dll
 C:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\HtmlAgilityPack.pdb
 C:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\HtmlAgilityPack.xml
 C:\GitHub\Gothmog\ProjectLeader\ProjectLeader\obj\Debug\ProjectLeader.csprojAssemblyReference.cache
+C:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\BouncyCastle.Crypto.dll
+C:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\ICSharpCode.SharpZipLib.dll
+C:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\NPOI.dll
+C:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\NPOI.OOXML.dll
+C:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\NPOI.OpenXml4Net.dll
+C:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\NPOI.OpenXmlFormats.dll
+C:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\BouncyCastle.Crypto.xml
+C:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\ICSharpCode.SharpZipLib.pdb
+C:\GitHub\Gothmog\ProjectLeader\ProjectLeader\bin\ICSharpCode.SharpZipLib.xml

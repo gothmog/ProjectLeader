@@ -1,0 +1,208 @@
+﻿@model ProjectLeader.Models.TaskEditViewModel
+@using ProjectLeader.Helpers;
+
+@{
+    ViewBag.Title = "UpsertTask";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var data = Html.GetUsersAsSelectListItems(Model.Task.UserId.ToString());
+}
+
+<script type="text/javascript">
+    function getParentId() {
+        return {
+            taskId: "@Model.Task.Id"
+        };
+    }
+
+    function addCommentToTask() {
+        $.ajax({
+            type: "POST",
+            url: "/Task/AddCommentToTask/",
+            data: { taskId: "@Model.Task.IdString", text: $("#NewCommentText").val() },
+            success: function (data) {
+                window.location = "/Task/UpsertTask?taskId=" + "@Model.Task.IdString";
+            }
+        });
+    }
+
+    function GetResource() {
+        var link = $("#hornbachUrl").val();
+        $("#findHornbach_button").prop("disabled", true);
+        $("#findHornbach_button").html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Loadingg...`);
+        $.ajax({
+            type: "GET",
+            url: '/Task/FindResource/?url=' + link,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                $("#ResourceName").val(response.ResourceName);
+                $("#ResourcePrice").val(response.ResourcePrice);
+                $('.image_class_hornbach').show();
+                $("#image_hornbach").attr("src", response.ResourceImageUrl);
+                $("#ResourceImageUrl").val(response.ResourceImageUrl);
+                $("#findHornbach_button").prop("disabled", false);
+                $("#findHornbach_button").html(`<span class='glyphicon glyphicon-question-sign'></span>&nbsp;Najít v Hornbachu`);
+            },
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                $("#findHornbach_button").prop("disabled", false);
+                $("#findHornbach_button").html(`<span class='glyphicon glyphicon-question-sign'></span>&nbsp;Najít v Hornbachu`);
+                alert(err.Message);
+            }
+        });
+    }
+
+    function editResource() {
+        $('#addResourcekModal').modal('show'); 
+        var grid = $("#GridResources").data("kendoGrid");
+        var model = grid.dataItem($(event.target).closest("tr"));
+        $("#ParentTaskIdString").val(model.ParentTaskIdString);
+        $("#ResourceName").val(model.ResourceName);
+        $("#ResourcePrice").val(model.ResourcePrice);
+        $("#ResourceCount").val(model.ResourceCount);
+        $('.image_class_hornbach').show();
+        $("#image_hornbach").attr("src", model.ResourceImageUrl);
+        $("#ResourceImageUrl").val(model.ResourceImageUrl);
+    }
+</script>
+
+
+@using (Html.BeginForm("UpsertTaskSave", "Task"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.Partial("TaskEditView", Model.Task)
+    </div>
+    <div>
+        @(Html.Kendo().Grid<ProjectLeader.Models.TaskViewModel>()
+        .Name("GridTasks")
+        .Sortable()
+            .Pageable(pageable => pageable
+            .Refresh(true))
+            .Filterable(filter => filter.Enabled(true)
+                                       .Operators(o => o.ForEnums(e => e.Clear()
+                                       .IsEqualTo("Rovná se")
+                                       .IsNotEqualTo("Nerovná se")))).DataSource(dataSource =>
+    {
+        dataSource.Ajax().Read(read => read.Action("SelectTasksForProject", "Task").Data("getParentId"))
+      .Model(model => model.Id(p => p.Id));
+    })
+                .ToolBar(tool =>
+    {
+        tool.Template("<button type='button' class='btn btn-success btn-nav' data-toggle='modal' data-target='#addToTaskModal'><span class='glyphicon glyphicon-plus'></span>&nbsp;Přidat podúkol</button>");
+    })
+
+.Columns(columns =>
+{
+    columns.Bound(o => o.Name).Title("Název");
+    columns.Bound(o => o.PriorityEnum).Title("Priorita");
+    columns.Bound(o => o.TypeEnum).Title("Typ");
+    columns.Bound(o => o.StateEnum).Title("Stav úkolu");
+    columns.Bound(o => o.Username).Title("Uživatel");
+    columns.Bound(o => o.IdString).ClientTemplate("<a class='t-button' href='/Task/DeleteTask?taskId=#= IdString #'>Smazat úkol</a><a class='t-button' href='/Task/UpsertTask?taskId=#= IdString #'>Editovat úkol</a>").Title("Akce").Width(150);
+
+}))
+    </div>
+}
+
+<div id="addToTaskModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Přidání úkolu</h4>
+            </div>
+            <div class="modal-body">
+@using (Html.BeginForm("AddTask", "Task"))
+{
+    @Html.AntiForgeryToken()
+                @Html.Partial("TaskInsertView", new ProjectLeader.Models.TaskInsertViewModel() 
+           { 
+               ParentTaskIdIns = Model.Task.Id.ToString()
+           })
+}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="addResourcekModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Přidání zdroje</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("UpsertResourceToTask", "Task"))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Partial("ResourcePartial", new ProjectLeader.Classes.Resource()
+               {
+                   ResourceCount = 1
+               })
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="commentsModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Komentáře</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Partial("CommentsPartial", Model.Task.Comments)
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="attachmentsModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Přílohy</h4>
+            </div>
+            <div class="modal-body">
+              @using (Html.BeginForm("AddAttachmentToTask", "Task", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                  @Html.Hidden("TaskAttachmentId", Model.Task.IdString)
+                  <input type="file" name="file" required />
+                  <button type="submit" class="btn btn-success btn-nav"><span class="glyphicon glyphicon-floppy-save"></span>&nbsp;Přidat soubor</button>
+                }
+                <br/>
+                @Html.Partial("AttachmentsPartial", Model.Task.Attachments)
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+            @section Scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+            }
