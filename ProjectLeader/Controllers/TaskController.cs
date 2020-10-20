@@ -151,18 +151,19 @@ namespace ProjectLeader.Controllers
                 task.UserId = ObjectId.Parse(model.UserId);
                 hist.IsChanged = true;
             }
-            if(task.Start != model.Start)
-			{
-                task.Start = model.Start;
-                hist.StartPast = task.Start;
-                hist.IsChanged = true;
-			}
-            if (task.End != model.End)
+            if (task.Start != model.StartingDate)
             {
-                task.End = model.End;
-                hist.EndPast = task.End;
+                hist.StartPast = task.Start;
+                task.Start = model.StartingDate;
                 hist.IsChanged = true;
             }
+            if (task.End != model.EndingDate)
+            {
+                hist.EndPast = task.End;
+                task.End = model.EndingDate;
+                hist.IsChanged = true;
+            }
+
             if (hist.IsChanged)
             {
                 if (task.Histories == null) task.Histories = new List<History>();

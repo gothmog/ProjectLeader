@@ -4,8 +4,14 @@
 @{
     var data = Html.GetUsersAsSelectListItems(Model.UserId);
 }
+<script src="@Url.Content("~/Scripts/kendo/kendo.culture.cs-CZ.min.js")"></script>
 
+@{
+    Culture = "cs-CZ";
+}
 <script type="text/javascript">
+
+
     function getParentId() {
         return {
             taskId: "@Model.IdString"
@@ -23,72 +29,72 @@
     });
 </script>
 
-    
-    <div class="form-horizontal">
-        <button type="submit" class="btn btn-success btn-nav"><span class="glyphicon glyphicon-floppy-save"></span>&nbsp;Uložit úkol</button>
-        <button type="button" class="btn btn-warning btn-nav"><span class="glyphicon glyphicon-floppy-remove" onclick="confirmDelete()"></span>&nbsp;Smazat úkol</button>
-        <button type="button" class="btn btn-success btn-nav" data-toggle='modal' data-target='#commentsModal'><span class="glyphicon glyphicon-comment"></span>&nbsp;Komenáře</button>
-        <button type="button" class="btn btn-success btn-nav" data-toggle='modal' data-target='#attachmentsModal'><span class="glyphicon glyphicon-paperclip"></span>&nbsp;Přílohy</button>
 
-        <hr />
-        @Html.Hidden("IdString")
-        @Html.Hidden("ProjectId")
-        @Html.Hidden("ParentTaskId")
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        
+<div class="form-horizontal">
+    <button type="submit" class="btn btn-success btn-nav"><span class="glyphicon glyphicon-floppy-save"></span>&nbsp;Uložit úkol</button>
+    <button type="button" class="btn btn-warning btn-nav"><span class="glyphicon glyphicon-floppy-remove" onclick="confirmDelete()"></span>&nbsp;Smazat úkol</button>
+    <button type="button" class="btn btn-success btn-nav" data-toggle='modal' data-target='#commentsModal'><span class="glyphicon glyphicon-comment"></span>&nbsp;Komenáře</button>
+    <button type="button" class="btn btn-success btn-nav" data-toggle='modal' data-target='#attachmentsModal'><span class="glyphicon glyphicon-paperclip"></span>&nbsp;Přílohy</button>
+
+    <hr />
+    @Html.Hidden("IdString")
+    @Html.Hidden("ProjectId")
+    @Html.Hidden("ParentTaskId")
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-8">
+            @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-2 col-md-4">
             <div class="form-group">
-                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.PriorityEnum, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.Kendo().DropDownList().BindTo(Model.PriorityEnum.GetEnumSelectListItem()).Name("PriorityEnum").HtmlAttributes(new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.TypeEnum, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.Kendo().DropDownList().BindTo(Model.TypeEnum.GetEnumSelectListItem()).Name("TypeEnum").HtmlAttributes(new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.StateEnum, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.Kendo().DropDownList().BindTo(Model.StateEnum.GetEnumSelectListItem()).Name("StateEnum").HtmlAttributes(new { @class = "form-control" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-8">
-                    @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.Percent, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Percent, new { htmlAttributes = new { @class = "form-control", style = "width:170px !important" } })
                 </div>
             </div>
-        <div class="row">
-            <div class="col-md-offset-2 col-md-4">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.PriorityEnum, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.Kendo().DropDownList().BindTo(Model.PriorityEnum.GetEnumSelectListItem()).Name("PriorityEnum").HtmlAttributes(new { @class = "form-control" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.TypeEnum, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.Kendo().DropDownList().BindTo(Model.TypeEnum.GetEnumSelectListItem()).Name("TypeEnum").HtmlAttributes(new { @class = "form-control" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.StateEnum, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.Kendo().DropDownList().BindTo(Model.StateEnum.GetEnumSelectListItem()).Name("StateEnum").HtmlAttributes(new { @class = "form-control" })
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Percent, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.EditorFor(model => model.Percent, new { htmlAttributes = new { @class = "form-control", style = "width:170px !important" } })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.Kendo().DropDownList().Name("UserId").BindTo(data).HtmlAttributes(new { @class = "form-control" })
-                    </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.Kendo().DropDownList().Name("UserId").BindTo(data).HtmlAttributes(new { @class = "form-control" })
                 </div>
             </div>
-            <div class="col-md-6">
-                <div>
-                    @(Html.Kendo().Grid<ProjectLeader.Classes.Resource>()
+        </div>
+        <div class="col-md-6">
+            <div>
+                @(Html.Kendo().Grid<ProjectLeader.Classes.Resource>()
         .Name("GridResources")
         .Sortable()
             .Pageable(pageable => pageable
@@ -112,30 +118,33 @@
     columns.Bound(o => o.Sum).Title("Suma");
     columns.Bound(o => o.ResourceIdString).ClientTemplate("<a class='t-button' href='/Task/DeleteResource?taskId=#= ParentTaskIdString #&resId=#= ResourceIdString #'>Smazat zdroj</a><a class='t-button' onclick='editResource()' >Editovat zdroj</a>").Title("Akce").Width(150);
 }))
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.StartingDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    <div class="demo-section k-content">
+                        @(Html.Kendo().DatePicker().Culture("cs-CZ").Name("StartingDate").Format("dd.MM.yyyy").ParseFormats(new String[] { "dd.MM.yyyy" }).Value(Model.StartingDate).HtmlAttributes(new { style = "width: 100%" }))
+                        </div>
+                    </div>
                 </div>
 
-							<div class="form-group">
-								@Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-4">
-                                    @(Html.Kendo().DatePicker().Name("Start").Format("dd/MM/yyyy").Value(Model.Start))
-                                </div>
-							</div>
-
-							<div class="form-group">
-								@Html.LabelFor(model => model.End, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-4">
-                                    @(Html.Kendo().DatePicker().Name("End").Format("dd/MM/yyyy").Value(Model.End))
-                                </div>
-							</div>
-
+            <div class="form-group">
+                @Html.LabelFor(model => model.EndingDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @(Html.Kendo().DatePicker().Name("EndingDate").Format("dd.MM.yyyy")
+    .ParseFormats(new String[] { "dd/MM/yyyy" }).Value(Model.EndingDate).HtmlAttributes(new { style = "width: 100%" }))
+                </div>
             </div>
-        </div>
-        
 
-        <div class="form-group">
-            <div class="col-md-offset-4 col-md-8">
-                
-            </div>
         </div>
     </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-4 col-md-8">
+
+        </div>
+    </div>
+</div>
 
